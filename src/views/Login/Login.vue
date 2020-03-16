@@ -47,6 +47,7 @@
 
 <script lang="ts">
     import {Component, Provide, Vue} from "vue-property-decorator";
+    import {State,Getter,Mutation,Action} from "vuex-class";
     import LoginHeader from './LoginHeader.vue'
 
     @Component({
@@ -56,6 +57,9 @@
     })
 
     export default class Login extends Vue{
+        //存储用户信息
+        @Action('setUser') setUser:any;
+
         @Provide() isLogin:boolean=false;
         @Provide() ruleForm:{
             username:String;
@@ -81,6 +85,8 @@
                         this.isLogin=false;
                         //存储token
                         localStorage.setItem('tsToken',res.data.token);
+                        //存储到vuex
+                        this.setUser(res.data.token)
                     }).catch(()=>{
                         this.isLogin=false;
                     })
