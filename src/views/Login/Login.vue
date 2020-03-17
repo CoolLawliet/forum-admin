@@ -86,7 +86,9 @@
                         //存储token
                         localStorage.setItem('tsToken',res.data.token);
                         //存储到vuex
-                        this.setUser(res.data.token)
+                        this.setUser(res.data.token);
+                        //登陆成功跳转
+                        this.$router.push('/');
                     }).catch(()=>{
                         this.isLogin=false;
                     })
