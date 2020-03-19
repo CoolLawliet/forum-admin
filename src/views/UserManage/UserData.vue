@@ -18,6 +18,13 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .account-data {
+        height: 100%;
+        overflow: auto;
 
+        .add-box {
+            margin-bottom: 10px;
+        }
+    }
 </style>

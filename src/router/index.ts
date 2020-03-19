@@ -71,7 +71,7 @@ export const asyncRouterMap=[
         path:'/accountData',
         name:'accountData',
         meta:{title:'管理员账户',icon:'fa fa-user-circle-o'},
-        component:()=>import('@/views/UserManage/AccountData.vue')
+        component:()=>import('@/views/UserManage/AdminData.vue')
       },
       {
         path:'/userData',

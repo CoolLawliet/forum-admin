@@ -20,8 +20,10 @@
             <el-table-column label="阅读量" prop="looks" width="100"></el-table-column>
             <el-table-column label="发布时间" :formatter="timeAgo" prop="create_time" width="160"></el-table-column>
             <el-table-column label="操作" width="120">
-                <template>
-                    <el-button size="mini" type="danger">删除</el-button>
+                <template slot-scope="scope">
+                    <el-button size="mini" type="danger"
+                               @click="handleDelete(scope.$index,scope.row)"
+                    >删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -131,42 +133,52 @@
                 }
             )
                 .then((res: any) => {
-
                     this.postData = res.data.data.list;
                     this.total = res.data.data.total;
                 })
         }
 
-        handleSizeChange(val:number):void{
-            this.size=val;
-            this.page=1;
-            this.searchVal?this.loadSearchData():this.loadData()
+        handleSizeChange(val: number): void {
+            this.size = val;
+            this.page = 1;
+            this.searchVal ? this.loadSearchData() : this.loadData()
         }
 
-        handleCurrentChange(val:number):void{
-            this.page=val;
-            this.searchVal?this.loadSearchData():this.loadData()
+        handleCurrentChange(val: number): void {
+            this.page = val;
+            this.searchVal ? this.loadSearchData() : this.loadData()
         }
 
-        handleSearch():void{
+        handleSearch(): void {
             //点击搜索
-            this.page=1;
-            this.searchVal?this.loadSearchData():this.loadData()
+            this.page = 1;
+            this.searchVal ? this.loadSearchData() : this.loadData()
         }
 
-        loadSearchData(){
+        handleDelete(index: number,row:any) {
+            (this as any).$axios.post('/admin/profiles/delPost',{
+                id:row._id
+            }).then((res:any)=>{
+                this.$message({
+                    message:res.data.msg,
+                    type:'success'
+                });
+                this.postData.splice(index,1)
+            })
+        }
+        loadSearchData() {
             //加载搜索数据
             (this as any).$axios.get('/admin/profiles/searchPost',
                 {
-                    params:{
-                        kw:this.searchVal,
-                        page:this.page,
-                        size:this.size
+                    params: {
+                        kw: this.searchVal,
+                        page: this.page,
+                        size: this.size
                     }
                 }
-                ).then((res:any)=>{
+            ).then((res: any) => {
                 this.postData = res.data.data.list;
-                    this.total =res.data.data.total;
+                this.total = res.data.data.total;
             });
         }
     }
