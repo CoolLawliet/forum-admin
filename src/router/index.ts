@@ -36,7 +36,7 @@ export const asyncRouterMap=[
     name:"dataManage",
     component:Layout,
     hidden: true,
-    meta:{title:'内容管理',icon:'fa fa-forumbee'},
+    meta:{title:'内容管理',icon:'fa fa-pencil-square-o'},
     redirect:'/postData',
     children:[
       {
@@ -50,7 +50,13 @@ export const asyncRouterMap=[
         name:'commentData',
         meta:{title:'评论管理',icon:'fa fa-comments'},
         component:()=>import('@/views/DataManage/CommentData.vue')
-      }
+      },
+      {
+        path:'/plateData',
+        name:'plateData',
+        meta:{title:'板块管理',icon:'fa fa-map-signs'},
+        component:()=>import('@/views/DataManage/PlateData.vue')
+      },
     ]
   },
   {
@@ -59,12 +65,19 @@ export const asyncRouterMap=[
     component:Layout,
     hidden: true,
     redirect:'/accountData',
+    meta:{title:'账户管理',icon:'fa fa-user-plus'},
     children:[
       {
         path:'/accountData',
         name:'accountData',
-        meta:{title:'账户管理',icon:'fa fa-user-plus'},
+        meta:{title:'管理员账户',icon:'fa fa-user-circle-o'},
         component:()=>import('@/views/UserManage/AccountData.vue')
+      },
+      {
+        path:'/userData',
+        name:'userData',
+        meta:{title:'用户账户',icon:'fa fa-users'},
+        component:()=>import('@/views/UserManage/UserData.vue')
       }
     ]
   },
