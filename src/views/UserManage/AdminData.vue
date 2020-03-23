@@ -20,7 +20,6 @@
                 <template slot-scope="scope">
                     <el-input v-model="scope.row.username"
                               v-if="scope.row.edit">
-
                     </el-input>
                     <span v-else>{{scope.row.username}}</span>
                 </template>
