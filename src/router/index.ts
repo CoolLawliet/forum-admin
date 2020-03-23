@@ -46,12 +46,6 @@ export const asyncRouterMap=[
         component:()=>import('@/views/DataManage/PostData.vue')
       },
       {
-        path:'/commentData',
-        name:'commentData',
-        meta:{title:'评论管理',icon:'fa fa-comments'},
-        component:()=>import('@/views/DataManage/CommentData.vue')
-      },
-      {
         path:'/plateData',
         name:'plateData',
         meta:{title:'板块管理',icon:'fa fa-map-signs'},
